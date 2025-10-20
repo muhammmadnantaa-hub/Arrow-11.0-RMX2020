@@ -72,16 +72,8 @@
 #define DATA_ADB_NO_AUTO_ADD_SUS_KSU_DEFAULT_MOUNT "/data/adb/susfs_no_auto_add_sus_ksu_default_mount"
 #define DATA_ADB_NO_AUTO_ADD_TRY_UMOUNT_FOR_BIND_MOUNT "/data/adb/susfs_no_auto_add_try_umount_for_bind_mount"
 
-static inline bool susfs_is_current_non_root_user_app_proc(void) {
-	return test_ti_thread_flag(&current->thread_info, TIF_NON_ROOT_USER_APP_PROC);
-}
-
-static inline void susfs_set_current_non_root_user_app_proc(void) {
-	set_ti_thread_flag(&current->thread_info, TIF_NON_ROOT_USER_APP_PROC);
-}
-
-static inline bool susfs_is_current_proc_su_not_allowed(void) {
-	return test_ti_thread_flag(&current->thread_info, TIF_PROC_SU_NOT_ALLOWED);
+static inline bool susfs_is_current_proc_umounted(void) {
+	return test_ti_thread_flag(&current->thread_info, TIF_PROC_UMOUNTED);
 }
 
 static inline void susfs_set_current_proc_umounted(void) {
