@@ -3,6 +3,9 @@
 #include <linux/init.h>
 #include <linux/proc_fs.h>
 #include <linux/seq_file.h>
+#include <asm/setup.h>
+
+static char new_command_line[COMMAND_LINE_SIZE];
 
 #ifdef CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG
 extern int susfs_spoof_cmdline_or_bootconfig(struct seq_file *m);
@@ -22,6 +25,9 @@ static int cmdline_proc_show(struct seq_file *m, void *v)
 	seq_printf(m, "%s\n", saved_command_line);
 #endif
 	return 0;
+seq_printf(m, "%s\n", new_command_line);
+	return 0;
+
 }
 
 static int cmdline_proc_open(struct inode *inode, struct file *file)
